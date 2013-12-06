@@ -33,7 +33,7 @@ class BaseClass
 
   def self.validation_method?(method_name)
     method_name_parts = method_name.to_s.split('_')
-    method_name_parts.first == 'validates' && method_name_parts.last == 'of'
+    method_name_parts[0] == 'validates' && method_name_parts[2] == 'of'
   end
 
   def validate
