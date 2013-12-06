@@ -21,15 +21,18 @@ class BaseClass
 
   def errors
     @error_messages = []
-    
-    @validations = self.class.instance_variable_get(:@validations)
-    validate_presence if @validations[:presence]
-    validate_numericality if @validations[:numericality]
-    
+    validate
     @error_messages
   end
 
   private
+
+  def validate
+    @validations = self.class.instance_variable_get(:@validations)
+    @validations.keys.each do |validation|
+      send("validate_#{validation}") if @validations[validation]
+    end
+  end
 
   def validate_presence
     @validations[:presence].each do |field|
