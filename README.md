@@ -1,13 +1,27 @@
+ActiveRecord Mimic
+==================
+
+This code test was set by a London tech company.
+
+The challenge
+-------------
+
 The goal of this task is to create a body for BaseClass.
 
 BaseClass should implement validations like ActiveRecord does.
-Every class inheriting from BaseClass should be able to use validations. Look at item.rb for example usage of validations.
+Every class inheriting from BaseClass should be able to use validations.
+`item.rb` and the tests in `item_test.rb` were provided as a basic specification.
 
-You can check that your solution works by running the test suite in item_test.rb.
+The aim was to write nice, universal code that would work with other parameters.
 
-Remember that the aim of this task is to write nice, universal code that will work with other parameters.
-We will be judging your overall approach & creativity, so attached test works only as kind of specification.
-We can accept partial solutions if the overall idea was right.
+My response
+-----------
 
-You can read about validations here:
-http://edgeguides.rubyonrails.org/active_record_validations.html
+This was my first foray into class instance variables and inheritance, so it
+may not be the most creative way to solve this problem!
+
+I generalised part of the problem by overwriting `self.method_missing`. However,
+there is still more DRYing out to be done for the instance methods.
+
+Furthermore, if I have time I will add tests to cover the implementation
+I have written.
