@@ -8,7 +8,7 @@ class Item < BaseClass
 
   def initialize(attributes = {})
     @price = attributes[:price]
-    @name  = attributes[:name]  
+    @name  = attributes[:name]
   end	
 
   validates_presence_of :name
