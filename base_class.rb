@@ -1,14 +1,13 @@
 # TASK: Implement this class to make tests pass
 class BaseClass
 
-  def self.validates_presence_of(field)
-    @validations[:presence] ||= []
-    @validations[:presence] += [field]
-  end
-
-  def self.validates_numericality_of(field)
-    @validations[:numericality] ||= []
-    @validations[:numericality] += [field]
+  def self.method_missing(method_name, argument)
+    method_name_parts = method_name.to_s.split('_')
+    if method_name_parts.first == 'validates' && method_name_parts.last == 'of'
+      validation = method_name_parts[1].to_sym
+      @validations[validation] ||= []
+      @validations[validation] += [argument]
+    end
   end
 
   def self.inherited(subclass)
