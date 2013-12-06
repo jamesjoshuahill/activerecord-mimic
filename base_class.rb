@@ -1,13 +1,18 @@
 # TASK: Implement this class to make tests pass
 class BaseClass
 
-  def self.method_missing(method_name, argument)
-    method_name_parts = method_name.to_s.split('_')
-    if method_name_parts.first == 'validates' && method_name_parts.last == 'of'
-      validation = method_name_parts[1].to_sym
+  def self.method_missing(method_name, *arguments, &block)
+    if validation_method?(method_name)
+      validation = method_name.to_s.split('_')[1].to_sym
       @validations[validation] ||= []
-      @validations[validation] += [argument]
+      @validations[validation] += [arguments.first]
+    else
+      super
     end
+  end
+
+  def self.respond_to_missing?(method_name, include_private = false)
+    validation_method?(method_name) || super
   end
 
   def self.inherited(subclass)
@@ -25,6 +30,11 @@ class BaseClass
   end
 
   private
+
+  def self.validation_method?(method_name)
+    method_name_parts = method_name.to_s.split('_')
+    method_name_parts.first == 'validates' && method_name_parts.last == 'of'
+  end
 
   def validate
     @validations = self.class.instance_variable_get(:@validations)
