@@ -23,5 +23,5 @@ may not be the most creative way to solve this problem!
 I generalised part of the problem by overwriting `self.method_missing`. However,
 there is still more DRYing out to be done for the instance methods.
 
-Furthermore, if I have time I will add tests to cover the implementation
+Furthermore, if I have time I would like to add tests to cover the implementation
 I have written.
